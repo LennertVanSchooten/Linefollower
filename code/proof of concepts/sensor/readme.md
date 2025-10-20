@@ -11,5 +11,5 @@ minimale hard- en software die aantoont dat minimaal 6 sensoren onafhankelijk va
 - Verbind de arduino met de pc en upload het programma in de arduino.
 - test met een wit oppervlak of de waarden veranderen van de sensoren.
 
-**Aansluitschema**
+**Aansluitschema**  
 <img width="888" height="721" alt="image" src="https://github.com/user-attachments/assets/fa271b93-ff58-465b-a20a-e01c468bccc1" />
