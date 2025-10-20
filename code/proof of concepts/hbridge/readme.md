@@ -2,11 +2,11 @@
 
 minimale hard- & software + stappenplan dat aantoont dat 2 motoren onafhankelijk van elkaar kunnen draaien, en (traploos) regelbaar zijn in snelheid en draairichting.
 
-#include <SoftwareSerial.h>
+<pre>#include <SoftwareSerial.h>
 
 SoftwareSerial BTserial(10, 11); // TX, RX van de HC-05
 const int led1Pin = 9;           // LED 1 (ON/OFF)
-const int led2Pin = 6;          // LED 2 (PWM)
+const int led2Pin = 6;           // LED 2 (PWM)
 
 int led2Value = 128;    // Basiswaarde voor LED2 (0-255)
 
@@ -40,4 +40,4 @@ void loop() {
       led2Value = val; // sla waarde op zodat hij behouden blijft
     }
   }
-}
+}</pre>
