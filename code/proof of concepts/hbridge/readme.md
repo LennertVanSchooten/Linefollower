@@ -2,42 +2,11 @@
 
 minimale hard- & software + stappenplan dat aantoont dat 2 motoren onafhankelijk van elkaar kunnen draaien, en (traploos) regelbaar zijn in snelheid en draairichting.
 
-<pre>#include <SoftwareSerial.h>
+**Benodigdheden**
+-H-brug DRV8833
+-2 x 18650 batterij
+-2 Micro metal gear motoren
+-Arduino Nano R3
 
-SoftwareSerial BTserial(10, 11); // TX, RX van de HC-05
-const int led1Pin = 9;           // LED 1 (ON/OFF)
-const int led2Pin = 6;           // LED 2 (PWM)
+<img width="1514" height="596" alt="image" src="https://github.com/user-attachments/assets/767b4255-3774-429b-971d-bb835a356cd4" />
 
-int led2Value = 128;    // Basiswaarde voor LED2 (0-255)
-
-void setup() {
-  pinMode(led1Pin, OUTPUT);
-  pinMode(led2Pin, OUTPUT);
-
-  Serial.begin(9600);
-  BTserial.begin(9600);
-
-  Serial.println("Bluetooth Dual LED control ready.");
-}
-
-void loop() {
-  analogWrite(led2Pin, led2Value);
-  if (BTserial.available()) {
-    String command = BTserial.readStringUntil('\n');
-    command.trim();
-
-    if (command.equalsIgnoreCase("ON")){
-      digitalWrite(led1Pin, HIGH);
-    }
-
-    if (command.equalsIgnoreCase("OFF")){
-      digitalWrite(led1Pin, LOW);
-    }
-
-    if (command.startsWith("PWM")) {
-      int val = command.substring(4).toInt();
-      val = constrain(val, 0, 255);
-      led2Value = val; // sla waarde op zodat hij behouden blijft
-    }
-  }
-}</pre>
