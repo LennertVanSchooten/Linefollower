@@ -1,39 +1,43 @@
-#include <SoftwareSerial.h>
-
-SoftwareSerial BTserial(10, 11); // TX, RX van de HC-05
-const int led1Pin = 9;           // LED 1 (ON/OFF)
-const int led2Pin = 6;          // LED 2 (PWM)
-
-int led2Value = 128;    // Basiswaarde voor LED2 (0-255)
+const int IN1 = 5;   // Motor A pin 1
+const int IN2 = 6;   // Motor A pin 2
+const int IN3 = 9;   // Motor B pin 1
+const int IN4 = 10;  // Motor B pin 2
 
 void setup() {
-  pinMode(led1Pin, OUTPUT);
-  pinMode(led2Pin, OUTPUT);
-
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
   Serial.begin(9600);
-  BTserial.begin(9600);
-
-  Serial.println("Bluetooth Dual LED control ready.");
+  Serial.println("Twee motoren snelheidsverloop test start");
 }
 
 void loop() {
-  analogWrite(led2Pin, led2Value);
-  if (BTserial.available()) {
-    String command = BTserial.readStringUntil('\n');
-    command.trim();
+  // snelheid van -255 (achteruit) naar 255 (vooruit)
+  for (int snelheid = -255; snelheid <= 255; snelheid++) {
+    stelMotorSnelheidIn(IN1, IN2, snelheid);  // Motor A
+    stelMotorSnelheidIn(IN3, IN4, snelheid);  // Motor B
+    Serial.println(snelheid);
+    delay(10); // bepaalt hoe snel de verandering verloopt
+  }
 
-    if (command.equalsIgnoreCase("ON")){
-      digitalWrite(led1Pin, HIGH);
-    }
+  // eventueel even stoppen
+  stelMotorSnelheidIn(IN1, IN2, 0);
+  stelMotorSnelheidIn(IN3, IN4, 0);
+  delay(1000);
+}
 
-    if (command.equalsIgnoreCase("OFF")){
-      digitalWrite(led1Pin, LOW);
-    }
-
-    if (command.startsWith("PWM")) {
-      int val = command.substring(4).toInt();
-      val = constrain(val, 0, 255);
-      led2Value = val; // sla waarde op zodat hij behouden blijft
-    }
+// ---------- Functie om motorrichting en PWM in te stellen ----------
+void stelMotorSnelheidIn(int pin1, int pin2, int snelheid) {
+  if (snelheid > 0) {
+    analogWrite(pin1, snelheid);
+    analogWrite(pin2, 0);
+  } else if (snelheid < 0) {
+    analogWrite(pin1, 0);
+    analogWrite(pin2, -snelheid); // negatief omzetten naar positief
+  } else {
+    // motor uit
+    analogWrite(pin1, 0);
+    analogWrite(pin2, 0);
   }
 }
