@@ -1,7 +1,7 @@
 ## bill of materials
 <br />
 
-|volgnummer|naam|omschrijving|nieuw/recup|kostprijs/stuk|aantal|subtotaal|
+|volgnummer|naam|omschrijving|nieuw/recup|kostprijs/stuk (zonder verzendkosten)|aantal|subtotaal|
 |----------|----|------------|-----------|---------|------|---------|
 |         1|    HC-08 Bluetooth module met adapter - clone| bluetooth module           | nieuw          | €8.50             |  1    |  €8.50       |
 |         2|    Arduino Nano R3 - kloon - met headers| Arduino Nano           | nieuw          |  €8.60            |  1    |  €8.60       |
@@ -12,10 +12,8 @@
 |         7|   15 Pins header Female | fermale headers 15 pinss           | nieuw          |  €0.31            | 2     | €0.62        |
 |         8|   18650   | batterij          | nieuw          | €1.45             | 2     | €2.90        |
 |         9|    2x 18650 Batterijhouder met klemkontacten en losse draden | Batterijhouder          |  nieuw         | €1.59             | 1     |  €1.59       |
-|         10|   Keeppower 2x 18650  batterijendoosje | batterijdoos           | nieuw          | €0.75             |1      | €0.75        |
-|         11|   XTAR MC2 USB-C batterijlader | batterijlader           |  nieuw         | €4.75             |1      | €4.75        |
-|         12|    | klemschroefblok 2 pins          | recup          |              |  2    |         |
-|         14|    |            |           |              |      |         |
-|         1|    |            |           |              |      |         |
-|         1|    |            |           |              |      |         |
-|         1|    |            |           |              |      |         |
+|         10|   klemschroefblok 2 pins |            | nieuw          | €0.55             |2      | €1.10        |
+|         11|   JLCPCB | zelfontworpen PCB          |  nieuw         | €4.245            |1      | €4.245        |
+|         12| wielen   | AliExpress wielen          | Nieuw          |  €0.98             |  2    |  €1.96       |
+|         |    |            |           |              |      |         |
+|         Totaal|    |            |           |              |      | €46.44        |
