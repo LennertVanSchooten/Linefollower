@@ -20,7 +20,6 @@ const int M1_IN1 = 5;
 const int M1_IN2 = 3;
 const int M2_IN3 = 6;
 const int M2_IN4 = 11;
-float iTerm, lastErr;
 
 struct param_t {
   unsigned long cycleTime;
@@ -29,8 +28,6 @@ struct param_t {
   int white[8];
   float diff;
   float kp;
-  float ki;
-  float kd;
 } params;
 
 void setup() {
@@ -76,7 +73,6 @@ void loop() {
 
     if (normalised[index] > 500) status = 0;
 
-    //cijfers kunnen veranderen
     if (index == 0) position = -20;
     else if (index == 7) position = 20;
     else {
@@ -91,7 +87,6 @@ void loop() {
 
       position = -b / (2 * a);
       position += index;
-      //cijfers kunnen veranderen
       position -= 3.5;
       position *= 15;
     }
@@ -100,15 +95,6 @@ void loop() {
     //kp waarde
     float error = -position;
     float output = error * params.kp;
-
-    /*integrerend regelen*/
-    iTerm += params.ki*error;
-    iTerm = constrain(iTerm, -510, 510);
-    output += iTerm;
-
-    /* differentiërend regelen */
-    output += params.kd * (error - lastErr);
-    lastErr = error;
 
     output = constrain(output, -510, 510);
 
@@ -163,21 +149,8 @@ void onSet() {
   {
     long newCycleTime = atol(value);
     float ratio = ((float) newCycleTime) / ((float) params.cycleTime);
-
-    params.ki *= ratio;
-    params.kd /= ratio;
-
+    
     params.cycleTime = newCycleTime;
-  }
-  else if (strcmp(param, "ki") == 0)
-  {
-    float cycleTimeInSec = ((float) params.cycleTime) / 1000000;
-    params.ki = atof(value) * cycleTimeInSec;
-  }
-  else if (strcmp(param, "kd") == 0)
-  {
-    float cycleTimeInSec = ((float) params.cycleTime) / 1000000;
-    params.kd = atof(value) / cycleTimeInSec;
   }
 
   EEPROM_writeAnything(0, params);
@@ -267,16 +240,8 @@ void onDebug() {
   SerialPort.print("kp: ");
   SerialPort.println(params.kp);
 
-  float cycleTimeInSec = ((float) params.cycleTime) / 1000000;
-  float ki = params.ki / cycleTimeInSec;
-  SerialPort.print("Ki: ");
-  SerialPort.println(ki);
-
-  float kd = params.kd * cycleTimeInSec;
-  SerialPort.print("Kd: ");
-  SerialPort.println(kd);
-
   SerialPort.print("calculation time: ");
   SerialPort.println(calculationTime);
   calculationTime = 0;
 }
+
