@@ -3,7 +3,7 @@
 
 |volgnummer|naam|omschrijving|nieuw/recup|kostprijs/stuk|aantal|subtotaal|
 |----------|----|------------|-----------|---------|------|---------|
-|         1|    HC-05 Bluetooth module met adapter - clone| bluetooth module           | recup          | €5.80             |  1    |  €5.80       |
+|         1|    HC-08 Bluetooth module met adapter - clone| bluetooth module           | recup          | €8.50             |  1    |  €5.80       |
 |         2|    Arduino Nano R3 - kloon - met headers| Arduino Nano           | nieuw          |  €8.60            |  1    |  €8.60       |
 |         3|    Female header stackable 6 pin |5x Female headers 6 pin          | nieuw          |  €2.85            | 2     | €5.70        |
 |         4|    Fasizi 5 x DRV8833|dubbele H-brug            | nieuw          | €5.99             | 1     |€5.99         |
